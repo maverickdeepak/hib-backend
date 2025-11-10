@@ -79,4 +79,12 @@ export class UsersService {
     const { password: _, ...userWithoutPassword } = user;
     return userWithoutPassword as User;
   }
+
+  // Method for authentication - returns user WITH password
+  async findUserByEmailForAuth(email: string): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+    });
+    return user;
+  }
 }
